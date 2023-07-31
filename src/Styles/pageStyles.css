@@ -1,0 +1,28 @@
+:root {
+  --main-color-1: #5b4279;
+  --main-color-2: #de9826;
+  --main-color-3: #bdbdbf;
+}
+
+/* ===============
+    page styles
+================= */
+
+.ourProducts-container {
+  background-color: rgba(189, 189, 191, 0.75);
+  text-align: right;
+  margin-top: 300px;
+  width: 100%;
+}
+
+.ourProducts-text {
+  font-weight: bold;
+  border-radius: 20px 0 20px 0;
+  color: var(--main-color-3);
+  background-color: var(--main-color-1);
+  padding: 5px 20px;
+  margin: 10px;
+  display: inline-block;
+  position: relative;
+  top: 10px;
+}

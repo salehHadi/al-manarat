@@ -1,0 +1,97 @@
+/* ====================
+    component style
+ ======================*/
+
+:root {
+  --main-color1: #5b4279;
+  --main-color-2: #de9826;
+  --main-color-3: #bdbdbf;
+}
+
+/* ==== Main ==== */
+
+.main {
+  background-image: url("https://images.unsplash.com/photo-1622385648155-fc668cb24ac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1035&q=80");
+  width: 100%;
+  height: auto;
+}
+
+/* ==== Navbar ==== */
+
+.navLink {
+  color: var(--main-color1);
+  font-weight: bold;
+  text-decoration: none;
+}
+.navItem {
+  text-align: right;
+  font-weight: bold;
+}
+/* ==== Form ==== */
+.form {
+  background-color: #fff;
+  width: 220px;
+  position: relative;
+  top: 250px;
+  left: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 1px 5px 20px 1px rgba(0, 0, 0, 0.23);
+}
+
+.box {
+  width: 200px;
+  font-weight: bold;
+}
+
+.form-btn {
+  color: white;
+  background-color: var(--main-color1);
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 10px;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 15px 0 15px 0;
+}
+
+/* ==== Project Card ==== */
+
+.project-card-box {
+  margin: 20px 10px;
+  text-align: right;
+  display: inline-block;
+  box-shadow: 1px 5px 20px 1px rgba(0, 0, 0, 0.23);
+  border: 1px solid var(--main-color1);
+  border-radius: 20px 0 0px 0;
+  max-width: 250px;
+}
+
+.project-card-box:first-child {
+  margin-top: 30px;
+}
+
+.main-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px 0 0px 0;
+}
+
+.progect-card-name {
+  background-color: var(--main-color-3);
+  color: #fff;
+  position: relative;
+  top: -310px;
+  padding: 7px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  border-radius: 20px 0 20px 0;
+}
+
+.project-card-text {
+  background-image: url("https://i.ibb.co/VHr7p8b/background.png");
+  padding: 0 5px;
+}
