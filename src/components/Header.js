@@ -40,27 +40,27 @@ export default function Header() {
             <ListItemText className="navItem" primary={"الرئيسية"} />
           </ListItemButton>
         </Link>
-        <Link className="navLink" to="http://localhost:3000/1">
+        <Link className="navLink" to="http://localhost:3000/">
           <ListItemButton>
             <ListItemText className="navItem" primary={"مشاريعنا"} />
           </ListItemButton>
         </Link>
-        <Link className="navLink" to="http://localhost:3000/1">
+        <Link className="navLink" to="http://localhost:3000/">
           <ListItemButton>
             <ListItemText className="navItem" primary={"عن المناراة الشامخة"} />
           </ListItemButton>
         </Link>
-        <Link className="navLink" to="http://localhost:3000/1">
+        <Link className="navLink" to="http://localhost:3000/">
           <ListItemButton>
             <ListItemText className="navItem" primary={"خدماتنا"} />
           </ListItemButton>
         </Link>
-        <Link className="navLink" to="http://localhost:3000/1">
+        <Link className="navLink" to="http://localhost:3000/">
           <ListItemButton>
             <ListItemText className="navItem" primary={"مميزاتنا"} />
           </ListItemButton>
         </Link>
-        <Link className="navLink" to="http://localhost:3000/1">
+        <Link className="navLink" to="http://localhost:3000/">
           <ListItemButton>
             <ListItemText className="navItem" primary={"موقعنا"} />
           </ListItemButton>

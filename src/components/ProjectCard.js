@@ -1,13 +1,17 @@
 import { Box, Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "../Styles/componentStyle.css";
+import { DataBase } from "../Provider";
 
 const ProjectCard = (props) => {
-  const { projectName, area, flats, floors, img, roof, status } = props;
-  console.log(props);
+  const { id, projectName, area, flats, floors, img, roof, status } = props;
+
+  const { projectDetails } = useContext(DataBase);
+  // projectDetails(id);
+
   return (
-    <Link to="/a">
+    <Link to="/project-info">
       <Box className="project-card-box">
         <div style={{ width: "100%", height: "290px" }}>
           <img className="main-image" src={img} alt="img" />

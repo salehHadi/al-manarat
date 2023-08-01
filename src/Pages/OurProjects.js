@@ -1,15 +1,16 @@
 import { Container, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import ProjectCard from "../components/ProjectCard";
 import "../Styles/pageStyles.css";
-import data from "../data.json";
+import { DataBase } from "../Provider";
 
 const OurProjects = () => {
+  const { data } = useContext(DataBase);
   console.log(data);
-
   const displayProjectCard = data.map((data) => (
     <ProjectCard
       key={data.id}
+      id={data.id}
       projectName={data.projectName}
       status={data.status}
       area={data.area}

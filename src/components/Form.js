@@ -15,7 +15,7 @@ const Form = () => {
       <Typography variant="h6" component="h2" fontWeight={"bold"}>
         يسعدنا تواصلك
       </Typography>
-      <Grid spacing={1}>
+      <Grid>
         <Grid className="box" item marginBottom={1}>
           <TextField
             label="الاسم"
