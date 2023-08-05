@@ -1,42 +1,89 @@
+import { Box } from "@mui/material";
 import React, { useState } from "react";
-import axios from "axios";
 
 const AddProduct = () => {
-  const [photos, setPhotos] = useState(null);
-
-  const fileSelectedHandler = (e) => {
-    setPhotos(e.target.files[0]);
-    const formData = new FormData();
-    formData.append("photos", e.target.files[0], e.target.files[0].name);
-    setPhotos(formData);
-  };
-
-  const handleSubmit = async () => {
-    try {
-      await axios
-        .post("http://localhost:4000/api/v1/addproject", photos)
-        .then((res) => console.log(res));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [projectName, setProjectName] = useState("");
+  const [status, setStatus] = useState("");
+  const [area, setArea] = useState("");
+  const [floors, setFloors] = useState("");
+  const [appartements, setAppartements] = useState("");
+  const [roofs, setRoofs] = useState("");
 
   return (
-    <div>
-      <div>
-        <h2>Upload images</h2>
-      </div>
-      <h3>Images</h3>
-      <input
-        onEncrypted={FormData}
-        type="file"
-        name="photos"
-        multiple
-        onChange={(e) => fileSelectedHandler(e)}
-        accept="image/x-png,image/gif,image/jpeg"
-      />
-      <button onClick={handleSubmit}>Submit</button>
-    </div>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
+      <form
+        encType="multipart/form-data"
+        id="form"
+        method="post"
+        action="http://localhost:4000/api/v1/addproject"
+      >
+        <div>
+          <h3>projectName</h3>
+          <input
+            required
+            name="projectName"
+            type="String"
+            value={projectName}
+            onInput={(e) => setProjectName(e.target.value)}
+          />
+          <h3>status</h3>
+          <input
+            required
+            name="status"
+            type="String"
+            value={status}
+            onInput={(e) => setStatus(e.target.value)}
+          />
+          <h3>Area</h3>
+          <input
+            required
+            name="area"
+            type="String"
+            value={area}
+            onInput={(e) => setArea(e.target.value)}
+          />
+          <h3>Floors</h3>
+          <input
+            required
+            name="floors"
+            type="Number"
+            value={floors}
+            onInput={(e) => setFloors(e.target.value)}
+          />
+          <h3>appartements</h3>
+          <input
+            required
+            name="appartements"
+            type="Number"
+            value={appartements}
+            onInput={(e) => setAppartements(e.target.value)}
+          />
+          <h3>Roofs</h3>
+          <input
+            required
+            name="roofs"
+            type="Number"
+            value={roofs}
+            onInput={(e) => setRoofs(e.target.value)}
+          />
+        </div>
+        <h3>Images</h3>
+        <input
+          // required
+          type="file"
+          name="photos"
+          accept="image/x-png,image/gif,image/jpeg"
+        />
+        <button type="submit">Submit</button>
+      </form>
+    </Box>
   );
 };
 
