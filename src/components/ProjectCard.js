@@ -1,14 +1,10 @@
 import { Box, Grid, Typography } from "@mui/material";
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "../Styles/componentStyle.css";
-import { DataBase } from "../Provider";
 
 const ProjectCard = (props) => {
-  const { id, projectName, area, flats, floors, img, roof, status } = props;
-
-  const { projectDetails } = useContext(DataBase);
-  // projectDetails(id);
+  const { projectName, area, flats, floors, img, roof, status } = props;
 
   return (
     <Link to="/project-info">

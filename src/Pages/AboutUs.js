@@ -10,7 +10,11 @@ const AboutUs = () => {
           عن المنارات الشامخة
         </Typography>
         <div>
-          <img className="aboutUs-img" src="https://i.ibb.co/C7d9HPR/1.png" />
+          <img
+            className="aboutUs-img"
+            src="https://i.ibb.co/C7d9HPR/1.png"
+            alt="img"
+          />
         </div>
       </Container>
     </div>
