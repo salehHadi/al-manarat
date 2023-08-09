@@ -14,7 +14,7 @@ const Form = () => {
   };
 
   return (
-    <form method="post" action="http://localhost:4000/api/v1/form">
+    <form method="post" action="/api/v1/form">
       <CardContent className="form">
         <Typography variant="h6" component="h2" fontWeight={"bold"}>
           يسعدنا تواصلك
