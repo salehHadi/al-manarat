@@ -31,7 +31,7 @@ export default function SignUp() {
     };
 
     await axios
-      .post("/api/v1//singup", newUser)
+      .post("/api/v1//singup-user", newUser)
       .then((res) => {
         console.log(res);
         usenavigate("/dashBoard");
