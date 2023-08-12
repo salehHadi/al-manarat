@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
+import AdminDashboard from "../adminComponent/AdminDashboard";
 
 const DashBoard = () => {
   let usenavigate = useNavigate();
@@ -32,7 +33,7 @@ const DashBoard = () => {
   };
   return (
     <>
-      <h1>DashBoard</h1>
+      <AdminDashboard />
       <button onClick={logout}>Logout</button>
     </>
   );
