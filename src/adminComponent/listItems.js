@@ -2,41 +2,60 @@ import * as React from "react";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import AlignHorizontalLeftIcon from "@mui/icons-material/AlignHorizontalLeft";
 import PeopleIcon from "@mui/icons-material/People";
-import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
-import AssignmentIcon from "@mui/icons-material/Assignment";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import Cookies from "universal-cookie";
+
+const logout = async () => {
+  await axios
+    .get("api/v1/logout")
+    .then((res) => {
+      console.log(res);
+      const cookies = new Cookies();
+      cookies.remove("token", { path: "/" });
+      window.location.reload();
+    })
+    .catch((err) => console.log(err));
+};
+
+const btnItems = [
+  {
+    name: "Dashboard",
+    to: "/dashBoard",
+    icon: <DashboardIcon />,
+  },
+  {
+    name: "Requests",
+    to: "/requests",
+    icon: <AlignHorizontalLeftIcon />,
+  },
+  {
+    name: "Add new Users",
+    to: "/authentication/signup",
+    icon: <PeopleIcon />,
+  },
+];
+
+const renderItem = btnItems.map((element) => {
+  return (
+    <Link to={element.to} style={{ textDecoration: "none" }}>
+      <ListItemButton>
+        <ListItemIcon>{element.icon}</ListItemIcon>
+        <ListItemText primary={element.name} sx={{ color: "black" }} />
+      </ListItemButton>
+    </Link>
+  );
+});
 
 export const mainListItems = (
   <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Requests" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Addpeople" />
-    </ListItemButton>
-    {/* <ListItemButton>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Reports" />
-    </ListItemButton> */}
-    <ListItemButton>
+    {renderItem}
+
+    <ListItemButton onClick={logout}>
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>

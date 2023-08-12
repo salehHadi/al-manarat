@@ -5,13 +5,16 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -19,6 +22,7 @@ const defaultTheme = createTheme();
 
 export default function SignUp() {
   let usenavigate = useNavigate();
+
   const handleSubmit = async (event) => {
     event.currentTarget.disabled = true;
     event.preventDefault();
@@ -55,7 +59,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Sign up new User
           </Typography>
           <Box
             component="form"
@@ -86,14 +90,16 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  // required
-                  fullWidth
-                  id="role"
-                  label="Role"
-                  name="role"
-                  autoComplete="role"
-                />
+                <Box sx={{ minWidth: 120 }}>
+                  <FormControl fullWidth>
+                    <InputLabel id="role">Role</InputLabel>
+                    <Select labelId="role" id="role" name="role" label="role">
+                      <MenuItem value={"user"}>User</MenuItem>
+                      <MenuItem value={"manager"}>Manager</MenuItem>
+                      <MenuItem value={"admin"}>Admin</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
@@ -112,13 +118,6 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
         {/* <Copyright sx={{ mt: 5 }} /> */}

@@ -20,7 +20,7 @@ function App() {
         <Route path="/authentication/signin" element={<SignIn />} />
         <Route path="/authentication/signup" element={<SignUp />} />
         <Route path="/dashBoard" element={<DashBoard />} />
-        <Route path="/Requests" element={<Requests />} />
+        <Route path="/requests" element={<Requests />} />
       </Routes>
     </>
   );
