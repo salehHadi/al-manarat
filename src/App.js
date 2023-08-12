@@ -18,7 +18,6 @@ function App() {
         <Route path="/project-info" element={<Product />} />
 
         {/* Admin Pages */}
-        <Route path="/product-add" element={<AddProduct />} />
         <Route path="/authentication/signin" element={<SignIn />} />
         <Route path="/authentication/signup" element={<SignUp />} />
         <Route
@@ -30,6 +29,7 @@ function App() {
 
         <Route path="/dashBoard" element={<DashBoard />} />
         <Route path="/requests" element={<Requests />} />
+        <Route path="/product-add" element={<AddProduct />} />
       </Routes>
     </>
   );
