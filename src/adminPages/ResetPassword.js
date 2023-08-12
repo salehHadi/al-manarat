@@ -3,10 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
@@ -14,12 +10,10 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Cookies from "universal-cookie";
 
 const defaultTheme = createTheme();
 
-export default function SignIn() {
-  const cookies = new Cookies();
+export default function ResetPassword() {
   let usenavigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -29,14 +23,11 @@ export default function SignIn() {
       password: data.get("password"),
     });
     await axios
-      .post("/api/v1/login", {
+      .post("/api/v1/forgotPassword", {
         email: data.get("email"),
-        password: data.get("password"),
       })
       .then((res) => {
-        console.log(res);
-        cookies.set("token", res.data.token, { path: "/" });
-        usenavigate("/dashBoard");
+        usenavigate("/authentication/email-sent");
       })
       .catch((err) => console.log(err));
   };
@@ -57,7 +48,7 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Reset Password
           </Typography>
           <Box
             component="form"
@@ -75,35 +66,14 @@ export default function SignIn() {
               autoComplete="email"
               autoFocus
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Submit
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="/authentication/reset-password" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
       </Container>

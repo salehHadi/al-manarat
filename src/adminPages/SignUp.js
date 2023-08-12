@@ -20,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 
 const defaultTheme = createTheme();
 
+console.log(crypto.randomUUID());
 export default function SignUp() {
   let usenavigate = useNavigate();
 

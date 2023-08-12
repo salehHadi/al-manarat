@@ -7,6 +7,8 @@ import SignIn from "./adminPages/SingIn";
 import SignUp from "./adminPages/SignUp";
 import DashBoard from "./adminPages/Dashborad";
 import Requests from "./adminPages/Requests";
+import ResetPassword from "./adminPages/ResetPassword";
+import EmailSent from "./adminPages/EmailSent";
 
 function App() {
   return (
@@ -19,6 +21,13 @@ function App() {
         <Route path="/product-add" element={<AddProduct />} />
         <Route path="/authentication/signin" element={<SignIn />} />
         <Route path="/authentication/signup" element={<SignUp />} />
+        <Route
+          path="/authentication/reset-password"
+          element={<ResetPassword />}
+        />
+
+        <Route path="/authentication/email-sent" element={<EmailSent />} />
+
         <Route path="/dashBoard" element={<DashBoard />} />
         <Route path="/requests" element={<Requests />} />
       </Routes>
