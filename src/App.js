@@ -6,6 +6,7 @@ import Main from "./Main";
 import SignIn from "./adminPages/SingIn";
 import SignUp from "./adminPages/SignUp";
 import DashBoard from "./adminPages/Dashborad";
+import Requests from "./adminPages/Requests";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/authentication/signin" element={<SignIn />} />
         <Route path="/authentication/signup" element={<SignUp />} />
         <Route path="/dashBoard" element={<DashBoard />} />
+        <Route path="/Requests" element={<Requests />} />
       </Routes>
     </>
   );
