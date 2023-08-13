@@ -16,7 +16,7 @@ const Form = () => {
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [message, setMessage] = useState("");
-  const [submit, setSubmit] = useState(false);
+  const [disableSubmit, setDisableSubmit] = useState(false);
 
   const style = {
     borderTopLeftRadius: "25px",
@@ -36,7 +36,7 @@ const Form = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setSubmit(true);
+    setDisableSubmit(true);
     const data = new FormData(event.currentTarget);
     console.log({
       name: data.get("name"),
@@ -120,7 +120,7 @@ const Form = () => {
           />
         </Grid>
         <Grid xs={12} sm={4} item>
-          <Button type="submit" disabled={submit} sx={formBtn}>
+          <Button type="submit" disabled={disableSubmit} sx={formBtn}>
             أرسل
           </Button>
         </Grid>

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -20,13 +20,14 @@ import { useNavigate } from "react-router-dom";
 
 const defaultTheme = createTheme();
 
-console.log(crypto.randomUUID());
+// console.log(crypto.randomUUID());
 export default function SignUp() {
+  const [disableSubmit, setDisableSubmit] = useState(false);
   let usenavigate = useNavigate();
 
   const handleSubmit = async (event) => {
-    event.currentTarget.disabled = true;
     event.preventDefault();
+    setDisableSubmit(true);
     const data = new FormData(event.currentTarget);
     const newUser = {
       name: data.get("name"),
@@ -115,6 +116,7 @@ export default function SignUp() {
               type="submit"
               fullWidth
               variant="contained"
+              disabled={disableSubmit}
               sx={{ mt: 3, mb: 2 }}
             >
               Sign Up

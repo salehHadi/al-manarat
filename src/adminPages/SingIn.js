@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -19,10 +19,12 @@ import Cookies from "universal-cookie";
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+  const [disableSubmit, setDisableSubmit] = useState(false);
   const cookies = new Cookies();
   let usenavigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setDisableSubmit(true);
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
@@ -90,6 +92,7 @@ export default function SignIn() {
               label="Remember me"
             />
             <Button
+              disabled={disableSubmit}
               type="submit"
               fullWidth
               variant="contained"
