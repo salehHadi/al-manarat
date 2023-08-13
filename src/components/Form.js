@@ -13,9 +13,6 @@ import { useNavigate } from "react-router-dom";
 
 const Form = () => {
   let usenavigate = useNavigate();
-  const [name, setName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [message, setMessage] = useState("");
   const [disableSubmit, setDisableSubmit] = useState(false);
 
   const style = {
@@ -65,8 +62,6 @@ const Form = () => {
           <TextField
             name="name"
             type="String"
-            value={name}
-            onInput={(e) => setName(e.target.value)}
             label="الاسم"
             placeholder="الاسم الثنائي"
             variant="outlined"
@@ -85,8 +80,6 @@ const Form = () => {
             label="الجوال"
             type="number"
             name="phoneNumber"
-            value={phoneNumber}
-            onInput={(e) => setPhoneNumber(e.target.value)}
             variant="outlined"
             className="box"
             placeholder="05XXXXXXXX"
@@ -104,8 +97,6 @@ const Form = () => {
             type="String"
             label="الطلب"
             name="message"
-            value={message}
-            onInput={(e) => setMessage(e.target.value)}
             variant="outlined"
             className="box"
             InputLabelProps={{ className: "box__cus" }}

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,9 +14,11 @@ import { useNavigate } from "react-router-dom";
 const defaultTheme = createTheme();
 
 export default function ResetPassword() {
+  const [disableSubmit, setDisableSubmit] = useState(false);
   let usenavigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setDisableSubmit(true);
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
@@ -70,6 +72,7 @@ export default function ResetPassword() {
               type="submit"
               fullWidth
               variant="contained"
+              disabled={disableSubmit}
               sx={{ mt: 3, mb: 2 }}
             >
               Submit

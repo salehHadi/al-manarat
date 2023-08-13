@@ -6,6 +6,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import AlignHorizontalLeftIcon from "@mui/icons-material/AlignHorizontalLeft";
 import PeopleIcon from "@mui/icons-material/People";
 import LayersIcon from "@mui/icons-material/Layers";
+import AddCardIcon from "@mui/icons-material/AddCard";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Cookies from "universal-cookie";
@@ -37,6 +38,11 @@ const btnItems = [
     name: "Add new Users",
     to: "/authentication/signup",
     icon: <PeopleIcon />,
+  },
+  {
+    name: "Add new Project",
+    to: "/product-add",
+    icon: <AddCardIcon />,
   },
 ];
 

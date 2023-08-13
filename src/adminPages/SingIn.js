@@ -26,10 +26,6 @@ export default function SignIn() {
     event.preventDefault();
     setDisableSubmit(true);
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
     await axios
       .post("/api/v1/login", {
         email: data.get("email"),
