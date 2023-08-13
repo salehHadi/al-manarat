@@ -43,17 +43,17 @@ const Form = () => {
       phoneNumber: data.get("phoneNumber"),
       message: data.get("message"),
     });
-    // await axios
-    //   .post("/api/v1/form", {
-    //     name: data.get("name"),
-    //     phoneNumber: data.get("phoneNumber"),
-    //     message: data.get("message"),
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //     usenavigate("/form-sent");
-    //   })
-    //   .catch((err) => console.log(err));
+    await axios
+      .post("/api/v1/form", {
+        name: data.get("name"),
+        phoneNumber: data.get("phoneNumber"),
+        message: data.get("message"),
+      })
+      .then((res) => {
+        console.log(res);
+        usenavigate("/form-sent");
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <CardContent className="form">
