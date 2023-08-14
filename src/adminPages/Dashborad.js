@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,7 @@ import AdminDashboard from "../adminComponent/AdminDashboard";
 
 const DashBoard = () => {
   let usenavigate = useNavigate();
+  const [reload, setReload] = useState(0);
 
   const data = async () => {
     await axios
@@ -31,6 +32,7 @@ const DashBoard = () => {
       })
       .catch((err) => console.log(err));
   };
+
   return (
     <>
       <AdminDashboard />

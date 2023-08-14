@@ -21,29 +21,18 @@ import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
+import axios from "axios";
 
-function createData(name, userType) {
-  return {
-    name,
-    userType,
-  };
+let rows;
+
+// const [users, setUser] = React.useState([]);
+try {
+  await axios.get("/api/v1/all-user").then((res) => (rows = res.data.users));
+} catch (error) {
+  console.log(error);
 }
 
-const rows = [
-  createData("Cupcake", "Manager"),
-  createData("Donut", "Manager"),
-  createData("Eclair", "Manager"),
-  createData("Frozen yoghurt", "Manager"),
-  createData("Gingerbread", "Manager"),
-  createData("Honeycomb", "Manager"),
-  createData("Ice cream sandwich", "Manager"),
-  createData("Jelly Bean", "Manager"),
-  createData("KitKat", "Manager"),
-  createData("Lollipop", "Manager"),
-  createData("Marshmallow", "Manager"),
-  createData("Nougat", "Manager"),
-  createData("Oreo", "Manager"),
-];
+console.log(rows);
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -155,7 +144,17 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-  const { numSelected } = props;
+  const { numSelected, selectedUsers } = props;
+
+  const handleDeleteUser = async (event) => {
+    selectedUsers.map(async (e) => {
+      await axios
+        .delete(`/api/v1/delete-user/${e}`)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    });
+    window.location.reload(true);
+  };
 
   return (
     <Toolbar
@@ -192,7 +191,7 @@ function EnhancedTableToolbar(props) {
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Delete">
+        <Tooltip title="Delete" onClick={handleDeleteUser}>
           <IconButton>
             <DeleteIcon />
           </IconButton>
@@ -212,13 +211,16 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable() {
+export default function Users() {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("userType");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  // all selected user
+  // console.log(selected);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -228,19 +230,19 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
+      const newSelected = rows.map((user) => user._id);
       setSelected(newSelected);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event, _id) => {
+    const selectedIndex = selected.indexOf(_id);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, _id);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -268,7 +270,7 @@ export default function EnhancedTable() {
     setDense(event.target.checked);
   };
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
+  const isSelected = (id) => selected.indexOf(id) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -286,7 +288,10 @@ export default function EnhancedTable() {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          selectedUsers={selected}
+        />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -303,17 +308,17 @@ export default function EnhancedTable() {
             />
             <TableBody>
               {visibleRows.map((row, index) => {
-                const isItemSelected = isSelected(row.name);
-                const labelId = `enhanced-table-checkbox-${index}`;
+                const isItemSelected = isSelected(row._id);
+                const labelId = row._id;
 
                 return (
                   <TableRow
                     hover
-                    onClick={(event) => handleClick(event, row.name)}
+                    onClick={(event) => handleClick(event, row._id)}
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
-                    key={row.name}
+                    key={row._id}
                     selected={isItemSelected}
                     sx={{ cursor: "pointer" }}
                   >
@@ -334,7 +339,23 @@ export default function EnhancedTable() {
                     >
                       {row.name}
                     </TableCell>
-                    <TableCell align="right">{row.userType}</TableCell>
+                    <TableCell
+                      component="th"
+                      id={labelId}
+                      scope="row"
+                      padding="none"
+                    >
+                      {row.email}
+                    </TableCell>
+                    <TableCell
+                      component="th"
+                      id={labelId}
+                      scope="row"
+                      padding="none"
+                    >
+                      {row.createdAt}
+                    </TableCell>
+                    <TableCell align="center">{row.role}</TableCell>
                   </TableRow>
                 );
               })}
