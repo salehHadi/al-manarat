@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Product from "./Pages/Product";
+import SingleProject from "./Pages/SingleProject";
 import AddProduct from "./adminPages/addProject";
 import Main from "./Main";
 import SignIn from "./adminPages/SingIn";
@@ -16,7 +16,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/project-info" element={<Product />} />
+        <Route path="/project-info" element={<SingleProject />} />
         <Route path="/form-sent" element={<FormSent />} />
         {/* Admin Pages */}
         <Route path="/authentication/signin" element={<SignIn />} />

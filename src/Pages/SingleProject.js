@@ -3,10 +3,20 @@ import { Box, Grid, Typography, Container } from "@mui/material";
 import { DataBase } from "../Provider";
 
 import "../Styles/componentStyle.css";
-const Product = () => {
-  const { prodectInfo } = useContext(DataBase);
+// import { useNavigate } from "react-router-dom";
+const SingleProject = () => {
+  const { projectInfo } = useContext(DataBase);
   // add img later
-  const { projectName, area, flats, floors, roof, status } = prodectInfo;
+  const { projectName, area, apartements, floors, roof, status } = projectInfo;
+
+  // if there is no detailes the user should back to home page
+  // const usenavigate = useNavigate();
+  // function handleRedirect() {
+  //   usenavigate("/");
+  // }
+  // if (!projectInfo) {
+  //   handleRedirect();
+  // }
 
   return (
     <Container
@@ -78,7 +88,7 @@ const Product = () => {
                 variant="body2"
                 component="p"
               >
-                {flats}: عدد الشقق
+                {apartements}: عدد الشقق
               </Typography>
             </Grid>
           </Grid>
@@ -93,4 +103,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default SingleProject;

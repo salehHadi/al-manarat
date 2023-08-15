@@ -1,20 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createContext } from "react";
-import data from "./data.json";
+import axios from "axios";
 
 const DataBase = createContext(null);
 
 function DataProvider(props) {
-  const allData = data;
-  const [prodectInfo, setProdectInfo] = useState([]);
+  const [allProjectsData, setAllProjectsData] = useState([]);
+  const [projectInfo, setProjectInfo] = useState([]);
+  const [customerForms, setCustomerForms] = useState([]);
 
-  const prodectDetails = (id) => {
-    const info = allData.find((e) => e.id === id);
-    setProdectInfo(info);
+  useEffect(() => {
+    const fun = async () => {
+      await axios
+        .get("api/v1/all-project")
+        .then((res) => setAllProjectsData(res.data.allProjects))
+        .catch((err) => console.log(err));
+    };
+    fun();
+    // eslint-disable-next-line
+  }, [0]);
+
+  useEffect(() => {
+    const fun = async () => {
+      await axios
+        .get("api/v1/all-forms")
+        .then((res) => setCustomerForms(res.data.customerRequests))
+        .catch((err) => console.log(err));
+    };
+    fun();
+    // eslint-disable-next-line
+  }, [0]);
+
+  const handleSingleProject = (id) => {
+    const info = allProjectsData.find((e) => e.id === id);
+    setProjectInfo(info);
   };
 
   return (
-    <DataBase.Provider value={{ data: allData, prodectDetails, prodectInfo }}>
+    <DataBase.Provider
+      value={{
+        data: allProjectsData,
+        handleSingleProject,
+        projectInfo,
+        customerForms: customerForms,
+      }}
+    >
       {props.children}
     </DataBase.Provider>
   );

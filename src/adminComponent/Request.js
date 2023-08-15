@@ -1,53 +1,19 @@
 import * as React from "react";
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Title from "./Title";
-
-function createData(id, date, name, PhoneNumber, Message) {
-  return { id, date, name, PhoneNumber, Message };
-}
-
-const rows = [
-  createData(
-    0,
-    "16 Mar, 2019",
-    "Elvis Presley",
-    "0546080503",
-    "VISA ⠀•••• 3719"
-  ),
-  createData(
-    1,
-    "16 Mar, 2019",
-    "Paul McCartney",
-    "0573791514",
-    "VISA ⠀•••• 3719"
-  ),
-  createData(2, "16 Mar, 2019", "Tom Scholz", "0576638198", "MC ⠀•••• 1253"),
-  createData(
-    3,
-    "16 Mar, 2019",
-    "Michael Jackson",
-    "0594053061",
-    "MC ⠀•••• 1253"
-  ),
-  createData(
-    4,
-    "15 Mar, 2019",
-    "Bruce Springsteen",
-    "0553432312",
-    "VISA ⠀•••• 5919"
-  ),
-];
-
-function preventDefault(event) {
-  event.preventDefault();
-}
+import { useContext } from "react";
+import { DataBase } from "../Provider";
+import { Link } from "react-router-dom";
 
 export default function Request() {
+  const { customerForms } = useContext(DataBase);
+  const rows = customerForms;
+  console.log(rows);
   return (
     <React.Fragment>
       <Title>Recent Request</Title>
@@ -62,18 +28,16 @@ export default function Request() {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
+            <TableRow key={row._id}>
+              <TableCell>{row.createdAt}</TableCell>
               <TableCell>{row.name}</TableCell>
-              <TableCell>{row.PhoneNumber}</TableCell>
-              <TableCell>{row.Message}</TableCell>
+              <TableCell>{row.phoneNumber}</TableCell>
+              <TableCell>{row.message}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        See more Requests
-      </Link>
+      <Link to={"/requests"}>See more Requests</Link>
     </React.Fragment>
   );
 }

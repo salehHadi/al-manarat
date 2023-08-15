@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -16,14 +15,8 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 // import AdminDashboard from "../adminComponent/AdminDashboard";
 import SidebarHeader from "../adminComponent/Sidebar-Header";
 import { Grid } from "@mui/material";
-
-function createData(name, date, phoneNumber) {
-  return {
-    name,
-    date,
-    phoneNumber,
-  };
-}
+import { useContext } from "react";
+import { DataBase } from "../Provider";
 
 function Row(props) {
   const { row } = props;
@@ -44,7 +37,7 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {row.name}
         </TableCell>
-        <TableCell align="right">{row.date}</TableCell>
+        <TableCell align="right">{row.createdAt}</TableCell>
         <TableCell align="right">{row.phoneNumber}</TableCell>
       </TableRow>
       <TableRow>
@@ -55,17 +48,7 @@ function Row(props) {
                 Message
               </Typography>
               <Table size="small" aria-label="purchases">
-                <TableHead>
-                  Check your text for errors, choose the best possible
-                  corrections from the suggested ones, and learn with the help
-                  of our service. The algorithm will detect syntactic,
-                  grammatical, and stylistic errors, suggest replacement
-                  options, and explain its decision in detail. On
-                  SentenceChecker.com you can check the text of any complexity,
-                  because our databases contain a large number of rules. We have
-                  made sure that working with the text is convenient and fast
-                  for you. Here’s how to use our tool...
-                </TableHead>
+                <TableHead>{row.message}</TableHead>
               </Table>
             </Box>
           </Collapse>
@@ -75,37 +58,16 @@ function Row(props) {
   );
 }
 
-Row.propTypes = {
-  row: PropTypes.shape({
-    date: PropTypes.number.isRequired,
-    phoneNumber: PropTypes.number.isRequired,
-  }).isRequired,
-};
-
-const rows = [
-  createData("Frozen yoghurt", "16 Mar, 2019", "0573791514"),
-  createData("Ice cream sandwich", "16 Mar, 2019", "0573791514"),
-  createData("Eclair", "16 Mar, 2019", "0573791514"),
-  createData("Cupcake", "16 Mar, 2019", "0573791514"),
-  createData("Gingerbread", "16 Mar, 2019", "0573791514"),
-  createData("Frozen yoghurt", "16 Mar, 2019", "0573791514"),
-  createData("Ice cream sandwich", "16 Mar, 2019", "0573791514"),
-  createData("Eclair", "16 Mar, 2019", "0573791514"),
-  createData("Cupcake", "16 Mar, 2019", "0573791514"),
-  createData("Gingerbread", "16 Mar, 2019", "0573791514"),
-  createData("Frozen yoghurt", "16 Mar, 2019", "0573791514"),
-  createData("Ice cream sandwich", "16 Mar, 2019", "0573791514"),
-  createData("Eclair", "16 Mar, 2019", "0573791514"),
-  createData("Cupcake", "16 Mar, 2019", "0573791514"),
-  createData("Gingerbread", "16 Mar, 2019", "0573791514"),
-  createData("Frozen yoghurt", "16 Mar, 2019", "0573791514"),
-  createData("Ice cream sandwich", "16 Mar, 2019", "0573791514"),
-  createData("Eclair", "16 Mar, 2019", "0573791514"),
-  createData("Cupcake", "16 Mar, 2019", "0573791514"),
-  createData("Gingerbread", "16 Mar, 2019", "0573791514"),
-];
+// Row.propTypes = {
+//   row: PropTypes.shape({
+//     date: PropTypes.number.isRequired,
+//     phoneNumber: PropTypes.number.isRequired,
+//   }).isRequired,
+// };
 
 export default function Requests() {
+  const { customerForms } = useContext(DataBase);
+  const rows = customerForms;
   return (
     <Grid
       sx={{
@@ -128,7 +90,7 @@ export default function Requests() {
             </TableHead>
             <TableBody>
               {rows.map((row) => (
-                <Row key={row.name} row={row} />
+                <Row key={row._id} row={row} />
               ))}
             </TableBody>
           </Table>

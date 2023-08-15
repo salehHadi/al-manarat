@@ -4,20 +4,21 @@ import ProjectCard from "../components/ProjectCard";
 import "../Styles/pageStyles.css";
 import { DataBase } from "../Provider";
 
-const OurProjects = () => {
+const AllProjects = () => {
   const { data } = useContext(DataBase);
-  console.log(data);
+
   const displayProjectCard = data.map((data) => (
     <ProjectCard
-      key={data.id}
-      id={data.id}
+      key={data._id}
+      id={data._id}
       projectName={data.projectName}
       status={data.status}
       area={data.area}
       floors={data.floors}
       img={data.image}
-      roof={data.roof}
-      flats={data.apartements}
+      roof={data.roofs}
+      apartements={data.appartements}
+      photo={data.photo}
     />
   ));
 
@@ -33,4 +34,4 @@ const OurProjects = () => {
   );
 };
 
-export default OurProjects;
+export default AllProjects;

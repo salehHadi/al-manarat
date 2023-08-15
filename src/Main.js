@@ -1,6 +1,6 @@
 import React from "react";
 import Home from "./Pages/Home";
-import OurProjects from "./Pages/OurProjects";
+import AllProjects from "./Pages/AllProjects";
 import AboutUs from "./Pages/AboutUs";
 import Header from "./components/Header";
 
@@ -9,7 +9,7 @@ const Main = () => {
     <div>
       <Header />
       <Home />
-      <OurProjects />
+      <AllProjects />
       <AboutUs />
     </div>
   );
