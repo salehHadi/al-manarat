@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
 import AdminDashboard from "../adminComponent/AdminDashboard";
 
 const DashBoard = () => {
+  const [renderPage, setRenderPage] = useState(false);
   let usenavigate = useNavigate();
 
   const data = async () => {
@@ -12,9 +13,13 @@ const DashBoard = () => {
       .get("/api/v1/userdashboard", {
         withCredentials: true,
       })
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        setRenderPage(true);
+      })
       .catch((err) => {
-        usenavigate("authentication/signin");
+        setRenderPage(false);
+        usenavigate("/authentication/signin");
         console.log(err);
       });
   };
@@ -34,8 +39,9 @@ const DashBoard = () => {
 
   return (
     <>
-      <AdminDashboard />
-      <button onClick={logout}>Logout</button>
+      {renderPage && <AdminDashboard /> && (
+        <button onClick={logout}>Logout</button>
+      )}
     </>
   );
 };

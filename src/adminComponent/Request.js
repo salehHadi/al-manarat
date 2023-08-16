@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 export default function Request() {
   const { customerForms } = useContext(DataBase);
   const rows = customerForms;
-  console.log(rows);
+
   return (
     <React.Fragment>
       <Title>Recent Request</Title>

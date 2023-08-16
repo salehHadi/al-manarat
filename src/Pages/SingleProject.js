@@ -1,22 +1,23 @@
 import React, { useContext } from "react";
 import { Box, Grid, Typography, Container } from "@mui/material";
 import { DataBase } from "../Provider";
-
 import "../Styles/componentStyle.css";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 const SingleProject = () => {
   const { projectInfo } = useContext(DataBase);
-  // add img later
-  const { projectName, area, apartements, floors, roof, status } = projectInfo;
 
-  // if there is no detailes the user should back to home page
-  // const usenavigate = useNavigate();
-  // function handleRedirect() {
-  //   usenavigate("/");
-  // }
-  // if (!projectInfo) {
-  //   handleRedirect();
-  // }
+  // if there is no detailes the user back to home page
+  const usenavigate = useNavigate();
+  function handleRedirect() {
+    console.log("work");
+    usenavigate("/");
+  }
+  if (!projectInfo) {
+    handleRedirect();
+  }
+  const { projectName, area, appartements, floors, roofs, status, photo } =
+    projectInfo;
 
   return (
     <Container
@@ -29,11 +30,9 @@ const SingleProject = () => {
     >
       <Box className="project-card-box">
         <div style={{ width: "100%", height: "290px" }}>
-          <img
-            className="main-image"
-            src="https://images.unsplash.com/photo-1550136513-548af4445338?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=874&q=80"
-            alt="img"
-          />
+          {projectInfo && (
+            <img className="main-image" src={photo.secure_url} alt="img" />
+          )}
           <p className="progect-card-name">{projectName}</p>
         </div>
 
@@ -78,7 +77,7 @@ const SingleProject = () => {
                 variant="body2"
                 component="p"
               >
-                {roof}: عدد الملاحق
+                {roofs}: عدد, photo الملاحق
               </Typography>
             </Grid>
             <Grid item xs={6}>
@@ -88,7 +87,7 @@ const SingleProject = () => {
                 variant="body2"
                 component="p"
               >
-                {apartements}: عدد الشقق
+                {appartements}: عدد الشقق
               </Typography>
             </Grid>
           </Grid>

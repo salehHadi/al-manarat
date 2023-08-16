@@ -6,7 +6,6 @@ import { DataBase } from "../Provider";
 
 const AllProjects = () => {
   const { data } = useContext(DataBase);
-
   const displayProjectCard = data.map((data) => (
     <ProjectCard
       key={data._id}

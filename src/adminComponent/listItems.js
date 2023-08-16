@@ -28,27 +28,31 @@ const btnItems = [
     name: "Dashboard",
     to: "/dashBoard",
     icon: <DashboardIcon />,
+    id: crypto.randomUUID(),
   },
   {
     name: "Requests",
     to: "/requests",
     icon: <AlignHorizontalLeftIcon />,
+    id: crypto.randomUUID(),
   },
   {
     name: "Add new Users",
     to: "/authentication/signup",
     icon: <PeopleIcon />,
+    id: crypto.randomUUID(),
   },
   {
     name: "Add new Project",
     to: "/product-add",
     icon: <AddCardIcon />,
+    id: crypto.randomUUID(),
   },
 ];
 
 const renderItem = btnItems.map((element) => {
   return (
-    <Link to={element.to} style={{ textDecoration: "none" }}>
+    <Link key={element.id} to={element.to} style={{ textDecoration: "none" }}>
       <ListItemButton>
         <ListItemIcon>{element.icon}</ListItemIcon>
         <ListItemText primary={element.name} sx={{ color: "black" }} />

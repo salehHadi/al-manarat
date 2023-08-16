@@ -6,8 +6,9 @@ const DataBase = createContext(null);
 
 function DataProvider(props) {
   const [allProjectsData, setAllProjectsData] = useState([]);
-  const [projectInfo, setProjectInfo] = useState([]);
+  const [projectInfo, setProjectInfo] = useState("");
   const [customerForms, setCustomerForms] = useState([]);
+  console.log(allProjectsData);
 
   useEffect(() => {
     const fun = async () => {
@@ -32,7 +33,7 @@ function DataProvider(props) {
   }, [0]);
 
   const handleSingleProject = (id) => {
-    const info = allProjectsData.find((e) => e.id === id);
+    const info = allProjectsData.find((e) => e._id === id);
     setProjectInfo(info);
   };
 
