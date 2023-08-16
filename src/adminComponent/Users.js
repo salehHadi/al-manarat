@@ -32,8 +32,6 @@ try {
   console.log(error);
 }
 
-console.log(rows);
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -211,7 +209,9 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function Users() {
+export default function Users(props) {
+  // const { userLogedIn } = props;
+  // console.log(userLogedIn);
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("userType");
   const [selected, setSelected] = React.useState([]);

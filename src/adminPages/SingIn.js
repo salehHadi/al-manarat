@@ -31,9 +31,8 @@ export default function SignIn() {
         email: data.get("email"),
         password: data.get("password"),
       })
-      .then((res) => {
-        console.log(res);
-        cookies.set("token", res.data.token, { path: "/" });
+      .then(async (res) => {
+        await cookies.set("token", res.data.token, { path: "/" });
         usenavigate("/dashBoard");
       })
       .catch((err) => console.log(err));
