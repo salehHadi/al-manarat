@@ -9,7 +9,6 @@ const ProjectCard = (props) => {
   const { id, projectName, area, apartements, floors, roof, status, photo } =
     props;
 
-  console.log(photo);
   return (
     <Link to="/project-info">
       <Box className="project-card-box" onClick={() => handleSingleProject(id)}>

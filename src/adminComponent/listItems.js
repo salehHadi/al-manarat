@@ -7,6 +7,7 @@ import AlignHorizontalLeftIcon from "@mui/icons-material/AlignHorizontalLeft";
 import PeopleIcon from "@mui/icons-material/People";
 import LayersIcon from "@mui/icons-material/Layers";
 import AddCardIcon from "@mui/icons-material/AddCard";
+import AutoAwesomeMotionIcon from "@mui/icons-material/AutoAwesomeMotion";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Cookies from "universal-cookie";
@@ -15,10 +16,9 @@ const logout = async () => {
   await axios
     .get("api/v1/logout")
     .then((res) => {
-      console.log(res);
       const cookies = new Cookies();
       cookies.remove("token", { path: "/" });
-      window.location.reload();
+      window.location.replace("http://localhost:3000/authentication/signin");
     })
     .catch((err) => console.log(err));
 };
@@ -46,6 +46,12 @@ const btnItems = [
     name: "Add new Project",
     to: "/product-add",
     icon: <AddCardIcon />,
+    id: crypto.randomUUID(),
+  },
+  {
+    name: "Our Projects",
+    to: "/our-projects",
+    icon: <AutoAwesomeMotionIcon />,
     id: crypto.randomUUID(),
   },
 ];

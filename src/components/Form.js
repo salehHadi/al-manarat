@@ -30,16 +30,11 @@ const Form = () => {
     border: "none",
     borderRadius: "15px 0 15px 0",
   };
-
+  console.log();
   const handleSubmit = async (event) => {
     event.preventDefault();
     setDisableSubmit(true);
     const data = new FormData(event.currentTarget);
-    console.log({
-      name: data.get("name"),
-      phoneNumber: data.get("phoneNumber"),
-      message: data.get("message"),
-    });
     await axios
       .post("/api/v1/form", {
         name: data.get("name"),
@@ -47,7 +42,6 @@ const Form = () => {
         message: data.get("message"),
       })
       .then((res) => {
-        console.log(res);
         usenavigate("/form-sent");
       })
       .catch((err) => console.log(err));

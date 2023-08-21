@@ -33,7 +33,9 @@ export default function SignIn() {
       })
       .then(async (res) => {
         await cookies.set("token", res.data.token, { path: "/" });
-        usenavigate("/dashBoard");
+        setTimeout(function () {
+          usenavigate("/dashBoard");
+        }, 5000);
       })
       .catch((err) => console.log(err));
   };

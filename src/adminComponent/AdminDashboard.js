@@ -32,10 +32,7 @@ function Copyright(props) {
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
-
-export default function AdminDashboard(props) {
-  const { userLogedIn } = props;
-
+export default function AdminDashboard() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex", backgroundColor: "white" }}>
@@ -64,7 +61,7 @@ export default function AdminDashboard(props) {
               </Grid>
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <Users userLogedIn={userLogedIn} />
+                  <Users />
                 </Paper>
               </Grid>
             </Grid>

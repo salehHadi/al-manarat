@@ -15,8 +15,9 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 // import AdminDashboard from "../adminComponent/AdminDashboard";
 import SidebarHeader from "../adminComponent/Sidebar-Header";
 import { Grid } from "@mui/material";
-import { useContext } from "react";
-import { DataBase } from "../Provider";
+import { useEffect } from "react";
+import { useState } from "react";
+import axios from "axios";
 
 function Row(props) {
   const { row } = props;
@@ -66,8 +67,18 @@ function Row(props) {
 // };
 
 export default function Requests() {
-  const { customerForms } = useContext(DataBase);
-  const rows = customerForms;
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => {
+    const getForms = async () => {
+      await axios
+        .get("api/v1/all-forms")
+        .then((res) => setRows(res.data.customerRequests))
+        .catch((err) => console.log(err));
+    };
+    getForms();
+  }, []);
+
   return (
     <Grid
       sx={{

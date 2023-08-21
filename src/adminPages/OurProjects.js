@@ -3,11 +3,9 @@ import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Toolbar from "@mui/material/Toolbar";
@@ -16,12 +14,24 @@ import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
+import { Grid } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import axios from "axios";
+import SidebarHeader from "../adminComponent/Sidebar-Header";
+
+let rows;
+
+// const [users, setUser] = React.useState([]);
+try {
+  await axios.get("/api/v1/all-project").then((res) => {
+    console.log(res);
+    rows = res.data.allProjects;
+  });
+} catch (error) {
+  console.log(error);
+}
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -135,14 +145,17 @@ EnhancedTableHead.propTypes = {
 function EnhancedTableToolbar(props) {
   const { numSelected, selectedUsers } = props;
 
-  const handleDeleteUser = async (event) => {
+  const handleDeleteProject = async (event) => {
     selectedUsers.map(async (e) => {
       await axios
-        .delete(`/api/v1/delete-user/${e}`)
+        .delete(`/api/v1/delete-project/${e}`)
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
     });
-    window.location.reload(true);
+    setTimeout(function () {
+      console.log("reload");
+      window.location.reload(true);
+    }, 5000);
   };
 
   return (
@@ -169,18 +182,11 @@ function EnhancedTableToolbar(props) {
           {numSelected} selected
         </Typography>
       ) : (
-        <Typography
-          sx={{ flex: "1 1 100%" }}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          Users
-        </Typography>
+        ""
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Delete" onClick={handleDeleteUser}>
+        <Tooltip title="Delete" onClick={handleDeleteProject}>
           <IconButton>
             <DeleteIcon />
           </IconButton>
@@ -200,43 +206,18 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function Users() {
+export default function OurProjects() {
+  // eslint-disable-next-line
   const [order, setOrder] = React.useState("asc");
+  // eslint-disable-next-line
   const [orderBy, setOrderBy] = React.useState("userType");
   const [selected, setSelected] = React.useState([]);
+  // eslint-disable-next-line
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
+  // eslint-disable-next-line
+  const [dense, setDense] = React.useState(true);
+  // eslint-disable-next-line
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [rows, setRows] = React.useState([]);
-
-  React.useEffect(() => {
-    const getUser = async () => {
-      await axios
-        .get("/api/v1/all-user")
-        .then((res) => {
-          setRows(res.data.users);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    getUser();
-  }, []);
-
-  const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === "asc";
-    setOrder(isAsc ? "desc" : "asc");
-    setOrderBy(property);
-  };
-
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelected = rows.map((user) => user._id);
-      setSelected(newSelected);
-      return;
-    }
-    setSelected([]);
-  };
 
   const handleClick = (event, _id) => {
     const selectedIndex = selected.indexOf(_id);
@@ -254,21 +235,7 @@ export default function Users() {
         selected.slice(selectedIndex + 1)
       );
     }
-
     setSelected(newSelected);
-  };
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
   };
 
   const isSelected = (id) => selected.indexOf(id) !== -1;
@@ -283,110 +250,133 @@ export default function Users() {
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
       ),
-    // eslint-disable-next-line
     [order, orderBy, page, rowsPerPage]
   );
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar
-          numSelected={selected.length}
-          selectedUsers={selected}
-        />
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
-          >
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
-            <TableBody>
-              {visibleRows.map((row, index) => {
-                const isItemSelected = isSelected(row._id);
-                const labelId = row._id;
+      <Paper sx={{ width: "100%", mb: 2, display: "flex" }}>
+        <SidebarHeader />
+        <div style={{ width: "100%", marginTop: "50px" }}>
+          <EnhancedTableToolbar
+            numSelected={selected.length}
+            selectedUsers={selected}
+          />
+          <TableContainer>
+            <Table
+              sx={{ textAlign: "center" }}
+              aria-labelledby="tableTitle"
+              size={dense ? "small" : "medium"}
+            >
+              <div sx={{ width: "100px", height: "100px" }}>
+                {visibleRows.map((row) => {
+                  const isItemSelected = isSelected(row._id);
 
-                return (
+                  return (
+                    <TableRow
+                      hover
+                      onClick={(event) => handleClick(event, row._id)}
+                      role="checkbox"
+                      aria-checked={isItemSelected}
+                      tabIndex={-1}
+                      key={row._id}
+                      selected={isItemSelected}
+                      sx={{ cursor: "pointer", display: "inline-block" }}
+                    >
+                      {/* labels */}
+
+                      <Box
+                        className="project-card-box"
+                        style={{ width: "160px" }}
+                      >
+                        <div style={{ width: "100%", height: "150px" }}>
+                          <img
+                            className="main-image"
+                            src={row.photo.secure_url}
+                            alt="img"
+                          />
+                          <p
+                            className="progect-card-name"
+                            style={{ top: "-120%" }}
+                          >
+                            {row.projectName}
+                          </p>
+                        </div>
+
+                        <div className="project-card-text">
+                          <Grid columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                            <Grid item xs={12}>
+                              <Typography
+                                marginBottom={0}
+                                sx={{ mt: 1, mb: 1 }}
+                                variant="body1"
+                                component="p"
+                                color={"red"}
+                                fontWeight={"bold"}
+                              >
+                                {row.status}
+                              </Typography>
+                            </Grid>
+                            <Grid item xs={6}>
+                              <Typography
+                                marginBottom={0}
+                                sx={{ mt: 1, mb: 1 }}
+                                variant="body2"
+                                component="p"
+                              >
+                                {row.floors}: عدد الأدوار
+                              </Typography>
+                            </Grid>
+                            <Grid item xs={6}>
+                              <Typography
+                                marginBottom={0}
+                                sx={{ mt: 1, mb: 1 }}
+                                variant="body2"
+                                component="p"
+                              >
+                                {row.area} :الحي
+                              </Typography>
+                            </Grid>
+                            <Grid item xs={6}>
+                              <Typography
+                                marginBottom={0}
+                                sx={{ mt: 1, mb: 1 }}
+                                variant="body2"
+                                component="p"
+                              >
+                                {row.roofs}: الملاحق عدد
+                              </Typography>
+                            </Grid>
+                            <Grid item xs={6}>
+                              <Typography
+                                marginBottom={0}
+                                sx={{ mt: 1, mb: 1 }}
+                                variant="body2"
+                                component="p"
+                              >
+                                {row.appartements}: عدد الشقق
+                              </Typography>
+                            </Grid>
+                          </Grid>
+                        </div>
+                      </Box>
+                    </TableRow>
+                  );
+                })}
+                {emptyRows > 0 && (
                   <TableRow
-                    hover
-                    onClick={(event) => handleClick(event, row._id)}
-                    role="checkbox"
-                    aria-checked={isItemSelected}
-                    tabIndex={-1}
-                    key={row._id}
-                    selected={isItemSelected}
-                    sx={{ cursor: "pointer" }}
+                    style={{
+                      height: (dense ? 33 : 53) * emptyRows,
+                    }}
                   >
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        color="primary"
-                        checked={isItemSelected}
-                        inputProps={{
-                          "aria-labelledby": labelId,
-                        }}
-                      />
-                    </TableCell>
-                    <TableCell
-                      component="th"
-                      id={labelId}
-                      scope="row"
-                      padding="none"
-                    >
-                      {row.name}
-                    </TableCell>
-                    <TableCell
-                      component="th"
-                      id={labelId}
-                      scope="row"
-                      padding="none"
-                    >
-                      {row.email}
-                    </TableCell>
-                    <TableCell
-                      component="th"
-                      id={labelId}
-                      scope="row"
-                      padding="none"
-                    >
-                      {row.createdAt}
-                    </TableCell>
-                    <TableCell align="center">{row.role}</TableCell>
+                    <TableCell colSpan={6} />
                   </TableRow>
-                );
-              })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+                )}
+              </div>
+            </Table>
+          </TableContainer>
+        </div>
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
     </Box>
   );
 }

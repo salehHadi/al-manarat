@@ -6,14 +6,23 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Title from "./Title";
-import { useContext } from "react";
-import { DataBase } from "../Provider";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export default function Request() {
-  const { customerForms } = useContext(DataBase);
-  const rows = customerForms;
+  const [rows, setRows] = useState([]);
 
+  useEffect(() => {
+    const getData = async () => {
+      await axios
+        .get("api/v1/all-forms")
+        .then((res) => setRows(res.data.customerRequests))
+        .catch((err) => console.log(err));
+    };
+    getData();
+  }, []);
   return (
     <React.Fragment>
       <Title>Recent Request</Title>

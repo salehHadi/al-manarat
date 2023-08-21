@@ -10,7 +10,6 @@ const SingleProject = () => {
   // if there is no detailes the user back to home page
   const usenavigate = useNavigate();
   function handleRedirect() {
-    console.log("work");
     usenavigate("/");
   }
   if (!projectInfo) {

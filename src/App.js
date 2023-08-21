@@ -10,6 +10,7 @@ import Requests from "./adminPages/Requests";
 import ResetPassword from "./adminPages/ResetPassword";
 import EmailSent from "./adminPages/EmailSent";
 import FormSent from "./Pages/FormSent";
+import OurProjects from "./adminPages/OurProjects";
 
 function App() {
   return (
@@ -25,10 +26,12 @@ function App() {
           path="/authentication/reset-password"
           element={<ResetPassword />}
         />
+        {/* Dashboard Routes */}
         <Route path="/authentication/email-sent" element={<EmailSent />} />
         <Route path="/dashBoard" element={<DashBoard />} />
         <Route path="/product-add" element={<AddProduct />} />
         <Route path="/requests" element={<Requests />} />
+        <Route path="/our-projects" element={<OurProjects />} />
       </Routes>
     </>
   );
