@@ -11,8 +11,12 @@ import ResetPassword from "./adminPages/ResetPassword";
 import EmailSent from "./adminPages/EmailSent";
 import FormSent from "./Pages/FormSent";
 import OurProjects from "./adminPages/OurProjects";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    document.title = "Al-Manarat RealEstate";
+  }, []);
   return (
     <>
       <Routes>
