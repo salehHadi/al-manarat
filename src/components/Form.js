@@ -30,7 +30,6 @@ const Form = () => {
     border: "none",
     borderRadius: "15px 0 15px 0",
   };
-  console.log();
   const handleSubmit = async (event) => {
     event.preventDefault();
     setDisableSubmit(true);
