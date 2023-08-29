@@ -29,7 +29,7 @@ export const Product = styled(Box)(({ theme }) => ({
   padding: "10px",
   width: "300px",
   position: "relative",
-  marginBottom: 10,
+  marginBottom: 50,
   [theme.breakpoints.up("md")]: {
     width: "280px",
   },

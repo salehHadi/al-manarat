@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
   FormContainer,
   FormFiledContainer,
   FormTextFiled,
+  SubmitButton,
 } from "../../Styles/form";
 
 export default function Form({ fromBanner }) {
@@ -65,9 +66,9 @@ export default function Form({ fromBanner }) {
           multiline
         />
 
-        <Button type="submit" disabled={disableSubmit}>
+        <SubmitButton color="primary" type="submit" disabled={disableSubmit}>
           أرسل
-        </Button>
+        </SubmitButton>
       </FormFiledContainer>
     </FormContainer>
   );

@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 import { Colors } from "../theme";
-import { Box, Grid, TextField } from "@mui/material";
+import { Box, Button, Grid, TextField } from "@mui/material";
 
 export const FormContainer = styled(Grid)(({ theme, fromBanner }) => ({
   background: Colors.white,
@@ -45,4 +45,24 @@ export const FormTextFiled = styled(TextField)(() => ({
   width: "100%",
   marginBottom: 10,
   textAlign: "right",
+}));
+
+export const SubmitButton = styled(Button, {
+  shouldForwardProp: (prop) => prop !== "color",
+  name: "FormButton",
+  slot: "Root",
+  overridesResolver: (props, styles) => [
+    styles.root,
+    props.color === "primary" && styles.primary,
+    props.color === "secondary" && styles.secondary,
+  ],
+})(({ theme }) => ({
+  padding: "10px 5px",
+  color: Colors.white,
+  fontWeight: "bold",
+  fontSize: "16px",
+  [theme.breakpoints.down("sm")]: {
+    padding: "5px 0 ",
+    fontSize: "14px",
+  },
 }));

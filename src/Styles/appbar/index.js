@@ -1,4 +1,4 @@
-import { Box, List, Typography } from "@mui/material";
+import { Box, IconButton, List, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Colors, FontFamily } from "../theme";
 import "@fontsource/montez";
@@ -27,4 +27,11 @@ export const MyList = styled(List)(({ type }) => ({
   flexGrow: 3,
   justifyContent: "center",
   alignItems: "center",
+}));
+
+export const DrawerCloseButton = styled(IconButton)(() => ({
+  position: "absolute",
+  top: 10,
+  left: "250px",
+  zIndex: 1999,
 }));
