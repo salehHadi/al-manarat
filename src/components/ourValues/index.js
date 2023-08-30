@@ -3,7 +3,7 @@ import { Slide } from "@mui/material";
 import { Image, ValuesContainer } from "../../Styles/ourValues";
 import { SectionName } from "../../Styles/products";
 
-const messages = [
+const image = [
   "https://i.ibb.co/5nZFsZr/m1.jpg",
   "https://i.ibb.co/XkRxX1v/m2.jpg",
 ];
@@ -19,7 +19,7 @@ export default function OurValues() {
     }, 3000);
 
     const intervalId = setInterval(() => {
-      setMessageIndex((i) => (i + 1) % messages.length);
+      setMessageIndex((i) => (i + 1) % image.length);
 
       setShow(true);
 
@@ -34,7 +34,7 @@ export default function OurValues() {
   }, []);
   return (
     <ValuesContainer ref={containerRef}>
-      <SectionName>رسالتنا</SectionName>
+      <SectionName mr={1}>رسالتنا</SectionName>
 
       <Slide
         sx={{ mt: 5 }}
@@ -46,7 +46,7 @@ export default function OurValues() {
           exit: 500,
         }}
       >
-        <Image src={messages[messageIndex]} />
+        <Image src={image[messageIndex]} />
       </Slide>
     </ValuesContainer>
   );

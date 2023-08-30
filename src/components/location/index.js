@@ -17,7 +17,7 @@ export default function Location() {
 
   return (
     <LocationContainer>
-      <SectionName>موقعنا</SectionName>
+      <SectionName mr={1}>موقعنا</SectionName>
       <MapContainer>
         <GoogleMap
           zoom={13}

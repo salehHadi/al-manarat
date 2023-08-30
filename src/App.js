@@ -12,6 +12,8 @@ import EmailSent from "./adminPages/EmailSent";
 import FormSent from "./Pages/FormSent";
 import OurProjects from "./adminPages/OurProjects";
 import { useEffect } from "react";
+import ProductDetail from "./components/productDetail";
+import { UIProvider } from "./context/ui";
 
 function App() {
   useEffect(() => {
@@ -19,24 +21,27 @@ function App() {
   }, []);
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/project-info" element={<SingleProject />} />
-        <Route path="/form-sent" element={<FormSent />} />
-        {/* Admin Pages */}
-        <Route path="/authentication/signin" element={<SignIn />} />
-        <Route path="/authentication/signup" element={<SignUp />} />
-        <Route
-          path="/authentication/reset-password"
-          element={<ResetPassword />}
-        />
-        {/* Dashboard Routes */}
-        <Route path="/authentication/email-sent" element={<EmailSent />} />
-        <Route path="/dashBoard" element={<DashBoard />} />
-        <Route path="/product-add" element={<AddProduct />} />
-        <Route path="/requests" element={<Requests />} />
-        <Route path="/our-projects" element={<OurProjects />} />
-      </Routes>
+      <UIProvider>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/project-info" element={<SingleProject />} />
+          <Route path="/product-detail" element={<ProductDetail />} />
+          <Route path="/form-sent" element={<FormSent />} />
+          {/* Admin Pages */}
+          <Route path="/authentication/signin" element={<SignIn />} />
+          <Route path="/authentication/signup" element={<SignUp />} />
+          <Route
+            path="/authentication/reset-password"
+            element={<ResetPassword />}
+          />
+          {/* Dashboard Routes */}
+          <Route path="/authentication/email-sent" element={<EmailSent />} />
+          <Route path="/dashBoard" element={<DashBoard />} />
+          <Route path="/product-add" element={<AddProduct />} />
+          <Route path="/requests" element={<Requests />} />
+          <Route path="/our-projects" element={<OurProjects />} />
+        </Routes>
+      </UIProvider>
     </>
   );
 }

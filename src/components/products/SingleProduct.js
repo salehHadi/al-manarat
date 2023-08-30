@@ -1,12 +1,11 @@
 import { Product, ProductImage, ProductName } from "../../Styles/products";
+import { UseUIContext } from "../../context/ui";
 import ProductMata from "./ProductMata";
 
-export default function SingleProduct({ matches, product }) {
+export default function SingleProduct({ product }) {
+  const { setProductDetail } = UseUIContext();
   return (
-    /**
-        how am I going to desing the page
-    */
-    <Product>
+    <Product onClick={() => setProductDetail(product)}>
       <div style={{ height: "420px" }}>
         <ProductImage src={product.photo.secure_url} />
       </div>

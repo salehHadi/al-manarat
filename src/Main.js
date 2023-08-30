@@ -9,7 +9,6 @@ import Products from "./components/products";
 import Footer from "./components/footer";
 import OurValues from "./components/ourValues";
 import Drawer from "./components/drawer";
-import { UIProvider } from "./context/ui";
 import Location from "./components/location";
 
 const Main = () => {
@@ -17,16 +16,14 @@ const Main = () => {
     <div>
       <ThemeProvider theme={theme}>
         <Container maxWidth="xl">
-          <UIProvider>
-            <Appbar />
-            <Banner />
-            <Location />
-            <Products />
-            <AboutUs />
-            <OurValues />
-            <Footer />
-            <Drawer />
-          </UIProvider>
+          <Appbar />
+          <Banner />
+          <Location />
+          <Products />
+          <AboutUs />
+          <OurValues />
+          <Footer />
+          <Drawer />
         </Container>
       </ThemeProvider>
     </div>
