@@ -10,6 +10,7 @@ import Footer from "./components/footer";
 import OurValues from "./components/ourValues";
 import Drawer from "./components/drawer";
 import { UIProvider } from "./context/ui";
+import Location from "./components/location";
 
 const Main = () => {
   return (
@@ -19,6 +20,7 @@ const Main = () => {
           <UIProvider>
             <Appbar />
             <Banner />
+            <Location />
             <Products />
             <AboutUs />
             <OurValues />

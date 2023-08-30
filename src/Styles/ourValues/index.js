@@ -3,8 +3,9 @@ import { styled } from "@mui/material/styles";
 
 export const ValuesContainer = styled(Box)(({ theme }) => ({
   display: "flex",
-  justifyContent: "flex-end",
+  justifyContent: "center",
   flexDirection: "column",
+  alignItems: "end",
   width: "100%",
   height: "450px",
   padding: "20px 0px",
@@ -13,6 +14,7 @@ export const ValuesContainer = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
     height: "850px",
     padding: "10%",
+    alignItems: "center",
   },
 }));
 

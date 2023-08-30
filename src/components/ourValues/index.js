@@ -37,6 +37,7 @@ export default function OurValues() {
       <SectionName>رسالتنا</SectionName>
 
       <Slide
+        sx={{ mt: 5 }}
         container={containerRef.current}
         direction={show ? "left" : "right"}
         in={show}
