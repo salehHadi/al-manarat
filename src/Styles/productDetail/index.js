@@ -1,4 +1,4 @@
-import { Box, styled } from "@mui/material";
+import { Box, Grid, styled } from "@mui/material";
 
 export const ProductDetailContainer = styled(Box)(() => ({
   marginTop: 55,
@@ -30,4 +30,18 @@ export const Image = styled("img")(({ src }) => ({
   height: "100%",
   borderRadius: "10px",
   src: `url(${src})`,
+}));
+
+export const GridTextContainer = styled(Grid)(() => ({
+  width: "75%",
+  justifyContent: "center",
+}));
+
+export const ImageContainerCorsul = styled(Box)(() => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "120px",
+  width: "120px",
+  // overflow: "hidden",
 }));
